@@ -14,4 +14,8 @@ Jak włączyć aplikacje:
 
 4. utwórz migracje wpisując "python manage.py makemigrations", a potem "python manage.py migrate"
 
-5. Utwórz superusera, by otworzyć admina na django poleceniem "python manage.py createsuperuser"
+5. wejdz do folderu "Frontend" a nastepnie "eventManagerFrontend" i wpisz komendę "npm install"
+
+6. uruchom Frontend komendą "npm run dev"
+
+7. na osobnym terminalu, wejdź w folder "eventManagerBackend" i uruchom go wpisując "python manage.py runserver"

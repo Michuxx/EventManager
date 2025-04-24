@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import test
 
 urlpatterns = [
-    path("", views.home, name="home")
+    path('api/test/', test.as_view(), name="co to")
 ]
