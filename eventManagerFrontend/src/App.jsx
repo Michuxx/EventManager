@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./components/homePage";
+import "./App.css";
 function App() {
-  const [msg, setMsg] = useState("");
-
-  useEffect(() => {
-    fetch("http://localhost:8000/api/test/")
-      .then((res) => res.json())
-      .then((data) => setMsg(data.message));
-  }, []);
-
-  return <h1>{msg}</h1>;
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
