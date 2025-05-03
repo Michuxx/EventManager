@@ -1,0 +1,88 @@
+.form-section {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section h3 {
+  font-size: 1.7rem;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 17px;
+  padding: 0.5rem;
+}
+
+.input-wrapper {
+  width: 100%;
+  margin-bottom: 0.7rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrapper p {
+  margin-bottom: 5px;
+}
+
+textarea {
+  resize: none;
+  min-height: 6rem;
+}
+
+button.submit {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  width: 40%;
+  cursor: pointer;
+}
+
+.btn-submit-wrapper {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.add-event-dialog {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 30%;
+}
+
+.dialog-header button {
+  font-size: 1.5rem;
+  border-radius: 100%;
+  padding: 2px;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

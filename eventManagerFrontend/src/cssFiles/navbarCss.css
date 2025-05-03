@@ -2,16 +2,22 @@ header {
   padding: 4rem 0 2rem 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: end;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 3rem;
   font-weight: bold;
 }
 
-.nav-links a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #333;
+.nav-links button {
+  padding: 9px 16px;
+  margin-right: 8px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #50c878;
+  color: white;
 }
