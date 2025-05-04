@@ -1,7 +1,68 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import "../cssFiles/AddEventDialogCss.css";
+import axios from "axios";
 
 const AddEventDialog = forwardRef((props, ref) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    short_description: "",
+    long_description: "",
+    date: "",
+    location: "",
+    max_people_amount: "",
+  });
+
+  const [image, setImage] = useState(null);
+
+  const fileInputRef = useRef(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    const data = new FormData();
+
+    for (const key in formData) {
+      data.append(key, formData[key]);
+    }
+
+    data.append("image", image);
+
+    try {
+      const response = await axios
+        .post("http://localhost:8000/events/upload/", data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          if (res.status === 201 || res.status === 200) {
+            setFormData({
+              name: "",
+              short_description: "",
+              long_description: "",
+              date: "",
+              location: "",
+              max_people_amount: "",
+            });
+            setImage(null);
+            fileInputRef.current.value = null;
+          }
+        })
+        .catch((err) => {
+          console.log(err.response?.data || err.message);
+        });
+    } catch (err) {
+      console.log(err.response?.data || err.message);
+    }
+  };
+
   return (
     <dialog ref={ref} className="add-event-dialog">
       <aside className="form-section">
@@ -13,26 +74,79 @@ const AddEventDialog = forwardRef((props, ref) => {
         </div>
         <div className="input-wrapper">
           <p>Event</p>
-          <input type="text" placeholder="Event Title" required />
+          <input
+            name="name"
+            type="text"
+            placeholder="Event Title"
+            onChange={handleChange}
+            value={formData.name}
+            required
+          />
         </div>
         <div className="input-wrapper">
-          <p>Description</p>
-          <textarea placeholder="Description" required></textarea>
+          <p>Short description</p>
+          <textarea
+            name="short_description"
+            placeholder="it will be shown on all events page"
+            onChange={handleChange}
+            value={formData.short_description}
+            required
+          ></textarea>
+        </div>
+        <div className="input-wrapper">
+          <p>Long description</p>
+          <textarea
+            name="long_description"
+            onChange={handleChange}
+            value={formData.long_description}
+            placeholder="it will be shown in this specific page"
+            required
+          ></textarea>
         </div>
         <div className="input-wrapper">
           <p>Location</p>
-          <input type="text" placeholder="Location" required />
+          <input
+            type="text"
+            name="location"
+            onChange={handleChange}
+            value={formData.location}
+            placeholder="Location"
+            required
+          />
         </div>
         <div className="input-wrapper">
           <p>Time of event</p>
-          <input type="datetime-local" required />
+          <input
+            name="date"
+            onChange={handleChange}
+            value={formData.date}
+            type="datetime-local"
+            required
+          />
+        </div>
+        <div className="input-wrapper">
+          <p>Max amount of people</p>
+          <input
+            name="max_people_amount"
+            onChange={handleChange}
+            value={formData.max_people_amount}
+            type="number"
+            required
+          />
         </div>
         <div className="input-wrapper">
           <p>Image</p>
-          <input type="file" />
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept="image/*"
+          />
         </div>
         <div className="btn-submit-wrapper">
-          <button className="submit">Add Event</button>
+          <button className="submit" onClick={handleSubmit}>
+            Add Event
+          </button>
         </div>
       </aside>
     </dialog>

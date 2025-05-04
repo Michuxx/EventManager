@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import test
+from .views import EventUpload
 
 urlpatterns = [
-    path('api/test/', test.as_view(), name="co to")
+    path('events/upload/', EventUpload.as_view(), name="co to")
 ]

@@ -4,14 +4,14 @@ import "../cssFiles/eventPageCss.css";
 const EventPage = ({ title, date, location, description }) => {
   return (
     <>
-      <div class="event-card">
+      <div className="event-card">
         <h2>{title}</h2>
-        <p class="meta">📅 {date}</p>
-        <p class="location">{location}</p>
-        <p class="description">{description}</p>
-        <div class="buttons">
-          <button class="edit">Edit</button>
-          <button class="delete">Delete</button>
+        <p className="meta">📅 {date}</p>
+        <p className="location">{location}</p>
+        <p className="description">{description}</p>
+        <div className="buttons">
+          <button className="edit">Edit</button>
+          <button className="delete">Delete</button>
         </div>
       </div>
     </>
