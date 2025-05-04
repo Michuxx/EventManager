@@ -13,7 +13,7 @@ const AddEventDialog = forwardRef((props, ref) => {
   });
 
   const [image, setImage] = useState(null);
-
+  const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
@@ -22,7 +22,18 @@ const AddEventDialog = forwardRef((props, ref) => {
   };
 
   const handleFileChange = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    setImage(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImagePreview(null);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -52,7 +63,9 @@ const AddEventDialog = forwardRef((props, ref) => {
               max_people_amount: "",
             });
             setImage(null);
+            setImagePreview(null);
             fileInputRef.current.value = null;
+            ref.current.close();
           }
         })
         .catch((err) => {
@@ -143,6 +156,16 @@ const AddEventDialog = forwardRef((props, ref) => {
             accept="image/*"
           />
         </div>
+        {imagePreview && (
+          <div className="image-preview-wrapper">
+            <p>Podgląd:</p>
+            <img
+              src={imagePreview}
+              alt="Podgląd"
+              style={{ maxWidth: "400px" }}
+            />
+          </div>
+        )}
         <div className="btn-submit-wrapper">
           <button className="submit" onClick={handleSubmit}>
             Add Event
