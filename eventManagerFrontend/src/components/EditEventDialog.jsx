@@ -78,7 +78,7 @@ const EditEventDialog = ({ event, isOpened, setIsOpened }) => {
           <input
             name="date"
             onChange={handleChange}
-            value={formData.date}
+            value={formData.isoDate}
             type="datetime-local"
             required
           />

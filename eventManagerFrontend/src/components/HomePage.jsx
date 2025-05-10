@@ -19,10 +19,12 @@ const HomePage = () => {
     location: "",
     max_people_amount: "",
     image: null,
+    isoDate: "",
   });
 
   const handleSetEventToEdit = (id) => {
-    setEvent(events.find((e) => e.id === id));
+    let event = events.find((e) => e.id === id);
+    setEvent(event);
     setIsEditOpened(true);
     console.log(event);
   };
@@ -51,9 +53,12 @@ const HomePage = () => {
         minute: "2-digit",
       });
 
+      let isoDate = new Date(event.date).toISOString().slice(0, 16);
+
       return {
         ...event,
         date: formattedDate,
+        isoDate: isoDate,
       };
     });
 
