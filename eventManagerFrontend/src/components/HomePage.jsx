@@ -46,6 +46,18 @@ const HomePage = () => {
       });
   };
 
+  const deleteEvent = (id) => {
+    axios
+      .delete(`http://localhost:8000/events/delete/${id}/`)
+      .then((response) => {
+        setEvents((events) => events.filter((e) => e.id !== id));
+        console.log("event has been deleted. " + response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   useEffect(() => {
     getAllEvents();
   }, []);
@@ -55,7 +67,7 @@ const HomePage = () => {
       <Navbar ref={addDialogRef} />
       <AddEventDialog ref={addDialogRef} addEvent={handleAddEvent} />
       <div className="events-wrapper">
-        <AllEventsPage events={events} />
+        <AllEventsPage events={events} deleteEvent={deleteEvent} />
       </div>
     </div>
   );

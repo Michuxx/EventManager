@@ -1,6 +1,6 @@
 import EventPage from "./EventPage";
 
-const AllEventsPage = ({ events }) => {
+const AllEventsPage = ({ events, deleteEvent }) => {
   return (
     <>
       {events.length > 0 ? (
@@ -14,6 +14,7 @@ const AllEventsPage = ({ events }) => {
             image={event.image}
             currentPeople={event.people_amount}
             maxPeople={event.max_people_amount}
+            deleteEvent={() => deleteEvent(event.id)}
           />
         ))
       ) : (

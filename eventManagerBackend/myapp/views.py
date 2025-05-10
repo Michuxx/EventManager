@@ -5,6 +5,7 @@ import os
 from django.conf import settings
 from .models import Event
 from .serializers import EventSerializer
+from django.shortcuts import get_object_or_404
 
 class EventUpload(APIView):
     def post(self, request, format=None):
@@ -49,3 +50,9 @@ class GetAllEvents(APIView):
         events = Event.objects.all()
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
+
+class DeleteEvent(APIView):
+    def delete(self, request, pk):
+        event = get_object_or_404(Event, pk=pk)
+        event.delete()
+        return Response({"message": "Event deleted"}, status=status.HTTP_204_NO_CONTENT)

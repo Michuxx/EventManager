@@ -9,6 +9,7 @@ const EventPage = ({
   image,
   currentPeople,
   maxPeople,
+  deleteEvent,
 }) => {
   return (
     <>
@@ -48,7 +49,9 @@ const EventPage = ({
               </div>
               <div className="buttons">
                 <button className="edit">Edit</button>
-                <button className="delete">Delete</button>
+                <button className="delete" onClick={deleteEvent}>
+                  Delete
+                </button>
               </div>
             </div>
           </article>

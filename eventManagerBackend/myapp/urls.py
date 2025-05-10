@@ -1,8 +1,10 @@
 from django.urls import path
 from .views import EventUpload
 from .views import GetAllEvents
+from .views import DeleteEvent
 
 urlpatterns = [
     path('events/upload/', EventUpload.as_view(), name="uploadEvent"),
-    path('events/getAllEvents/', GetAllEvents.as_view(), name="getEvents")
+    path('events/getAllEvents/', GetAllEvents.as_view(), name="getEvents"),
+    path('events/delete/<int:pk>/', DeleteEvent.as_view(), name="deleteEvent")
 ]
