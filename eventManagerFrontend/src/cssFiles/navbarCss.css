@@ -21,3 +21,7 @@ header {
   background-color: #50c878;
   color: white;
 }
+
+.nav-links button:hover {
+  background-color: #3e9a5d;
+}

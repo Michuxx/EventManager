@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import AllEventsPage from "./AllEventsPage";
 import AddEventDialog from "./AddEventDialog";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const HomePage = () => {
   const addDialogRef = useRef(null);
@@ -12,7 +13,15 @@ const HomePage = () => {
   const handleAddEvent = (event) => {
     let transformedEvent = transformDate([event])[0];
     setEvents((prev) => [...prev, transformedEvent]);
-    console.log(events);
+    Swal.fire({
+      toast: true,
+      position: "top", // lub "top", "bottom-end" itd.
+      icon: "success",
+      title: "Event has been added!",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    });
   };
 
   const transformDate = (events) => {
@@ -46,6 +55,24 @@ const HomePage = () => {
       });
   };
 
+  const deleteConfirm = (id) => {
+    Swal.fire({
+      title: "Are you sure ?!",
+      text: "this operation cannot be undone",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, Delete!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteEvent(id);
+        Swal.fire("Deleted!", "Event has been succesfuly deleted.", "success");
+      }
+    });
+  };
+
   const deleteEvent = (id) => {
     axios
       .delete(`http://localhost:8000/events/delete/${id}/`)
@@ -55,6 +82,7 @@ const HomePage = () => {
       })
       .catch((e) => {
         console.log(e);
+        Swal.fire("Error!", "Something went wrong.", "error");
       });
   };
 
@@ -67,7 +95,7 @@ const HomePage = () => {
       <Navbar ref={addDialogRef} />
       <AddEventDialog ref={addDialogRef} addEvent={handleAddEvent} />
       <div className="events-wrapper">
-        <AllEventsPage events={events} deleteEvent={deleteEvent} />
+        <AllEventsPage events={events} deleteEvent={deleteConfirm} />
       </div>
     </div>
   );
