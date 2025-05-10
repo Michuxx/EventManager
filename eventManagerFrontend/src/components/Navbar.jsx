@@ -1,17 +1,16 @@
-import React, { forwardRef } from "react";
 import "../cssFiles/navbarCss.css";
 
-const Navbar = forwardRef((props, ref) => {
+const Navbar = ({ setIsAddingOpened }) => {
   return (
     <>
       <header>
         <div className="logo">EventManager</div>
         <div className="nav-links">
-          <button onClick={() => ref.current?.showModal()}>Add Event</button>
+          <button onClick={() => setIsAddingOpened(true)}>Add Event</button>
         </div>
       </header>
     </>
   );
-});
+};
 
 export default Navbar;

@@ -1,18 +1,8 @@
 import React, { useRef, useState } from "react";
-import "../cssFiles/AddEventDialogCss.css";
-import axios from "axios";
 import Input from "./Input";
 
-const AddEventDialog = ({ addEvent, isOpened, setIsOpened }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    short_description: "",
-    long_description: "",
-    date: "",
-    location: "",
-    max_people_amount: "",
-    image: null,
-  });
+const EditEventDialog = ({ event, isOpened, setIsOpened }) => {
+  const [formData, setFormData] = useState(event);
 
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
@@ -37,50 +27,11 @@ const AddEventDialog = ({ addEvent, isOpened, setIsOpened }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    const data = new FormData();
-
-    for (const key in formData) {
-      data.append(key, formData[key]);
-    }
-
-    try {
-      const response = await axios
-        .post("http://localhost:8000/events/upload/", data, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          if (res.status === 201 || res.status === 200) {
-            addEvent(res.data);
-            setFormData({
-              name: "",
-              short_description: "",
-              long_description: "",
-              date: "",
-              location: "",
-              max_people_amount: "",
-              image: null,
-            });
-            setImagePreview(null);
-            fileInputRef.current.value = null;
-            setIsOpened(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err.response?.data || err.message);
-        });
-    } catch (err) {
-      console.log(err.response?.data || err.message);
-    }
-  };
-
   return (
     <dialog open={isOpened} className="add-event-dialog">
       <aside className="form-section">
         <div className="dialog-header">
-          <h3>Add New Event</h3>
+          <h3>Edit event</h3>
           <button aria-label="Close" onClick={() => setIsOpened(false)}>
             <span aria-hidden="true">×</span>
           </button>
@@ -160,13 +111,11 @@ const AddEventDialog = ({ addEvent, isOpened, setIsOpened }) => {
           </div>
         )}
         <div className="btn-submit-wrapper">
-          <button className="submit" onClick={handleSubmit}>
-            Add Event
-          </button>
+          <button className="submit">Edit Event</button>
         </div>
       </aside>
     </dialog>
   );
 };
 
-export default AddEventDialog;
+export default EditEventDialog;

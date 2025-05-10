@@ -1,21 +1,38 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import AllEventsPage from "./AllEventsPage";
 import AddEventDialog from "./AddEventDialog";
+import EditEventDialog from "./EditEventDialog";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 const HomePage = () => {
-  const addDialogRef = useRef(null);
-
+  const [isEditOpened, setIsEditOpened] = useState(false);
+  const [isAddingOpened, setIsAddingOpened] = useState(false);
   const [events, setEvents] = useState([]);
+  const [event, setEvent] = useState({
+    id: "",
+    name: "",
+    short_description: "",
+    long_description: "",
+    date: "",
+    location: "",
+    max_people_amount: "",
+    image: null,
+  });
+
+  const handleSetEventToEdit = (id) => {
+    setEvent(events.find((e) => e.id === id));
+    setIsEditOpened(true);
+    console.log(event);
+  };
 
   const handleAddEvent = (event) => {
     let transformedEvent = transformDate([event])[0];
     setEvents((prev) => [...prev, transformedEvent]);
     Swal.fire({
       toast: true,
-      position: "top", // lub "top", "bottom-end" itd.
+      position: "top",
       icon: "success",
       title: "Event has been added!",
       showConfirmButton: false,
@@ -92,10 +109,25 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      <Navbar ref={addDialogRef} />
-      <AddEventDialog ref={addDialogRef} addEvent={handleAddEvent} />
+      <Navbar setIsAddingOpened={setIsAddingOpened} />
+      {isEditOpened && (
+        <EditEventDialog
+          event={event}
+          isOpened={isEditOpened}
+          setIsOpened={setIsEditOpened}
+        />
+      )}
+      <AddEventDialog
+        addEvent={handleAddEvent}
+        isOpened={isAddingOpened}
+        setIsOpened={setIsAddingOpened}
+      />
       <div className="events-wrapper">
-        <AllEventsPage events={events} deleteEvent={deleteConfirm} />
+        <AllEventsPage
+          events={events}
+          deleteEvent={deleteConfirm}
+          passEventData={handleSetEventToEdit}
+        />
       </div>
     </div>
   );
