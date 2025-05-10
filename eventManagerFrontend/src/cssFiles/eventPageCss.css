@@ -8,21 +8,21 @@
 
 .event-card h2 {
   margin: 0;
+  font-size: 2rem;
 }
 
 .meta,
 .location {
-  font-size: 14px;
+  font-size: 1.15rem;
   color: #555;
 }
 
 .description {
-  margin: 10px 0;
-  color: #333;
+  color: #0f0f0f;
+  font-size: 1.3rem;
 }
 
 .buttons {
-  margin-top: 10px;
   display: flex;
   justify-content: end;
 }
@@ -34,6 +34,8 @@ button.delete {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  height: 50%;
+  min-width: 4rem;
 }
 
 button.edit {
@@ -44,4 +46,55 @@ button.edit {
 button.delete {
   background-color: #ef4444;
   color: white;
+}
+
+.event-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+aside {
+  width: 50%;
+}
+
+article {
+  width: 100%;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.image {
+  width: 100%;
+  display: flex;
+  border-radius: 8px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.buttons-wrapper {
+  display: flex;
+}
+
+.people {
+  width: 50%;
+  color: #555;
+}
+
+.people-amount {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+.people-info {
+  margin-bottom: 5px;
+}
+
+.buttons {
+  width: 50%;
+  display: flex;
+  align-items: flex-end;
 }

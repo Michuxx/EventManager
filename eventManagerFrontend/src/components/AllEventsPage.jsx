@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import EventPage from "./EventPage";
-import axios from "axios";
 
 const AllEventsPage = ({ events }) => {
   return (
@@ -13,6 +11,9 @@ const AllEventsPage = ({ events }) => {
             date={event.date}
             location={event.location}
             description={event.short_description}
+            image={event.image}
+            currentPeople={event.people_amount}
+            maxPeople={event.max_people_amount}
           />
         ))
       ) : (
