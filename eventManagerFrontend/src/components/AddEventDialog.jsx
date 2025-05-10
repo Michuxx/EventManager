@@ -2,7 +2,7 @@ import React, { forwardRef, useRef, useState } from "react";
 import "../cssFiles/AddEventDialogCss.css";
 import axios from "axios";
 
-const AddEventDialog = forwardRef((props, ref) => {
+const AddEventDialog = forwardRef(({ addEvent }, ref) => {
   const [formData, setFormData] = useState({
     name: "",
     short_description: "",
@@ -10,9 +10,9 @@ const AddEventDialog = forwardRef((props, ref) => {
     date: "",
     location: "",
     max_people_amount: "",
+    image: null,
   });
 
-  const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -23,7 +23,7 @@ const AddEventDialog = forwardRef((props, ref) => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setImage(file);
+    setFormData((prev) => ({ ...prev, image: file }));
 
     if (file) {
       const reader = new FileReader();
@@ -43,8 +43,6 @@ const AddEventDialog = forwardRef((props, ref) => {
       data.append(key, formData[key]);
     }
 
-    data.append("image", image);
-
     try {
       const response = await axios
         .post("http://localhost:8000/events/upload/", data, {
@@ -54,6 +52,7 @@ const AddEventDialog = forwardRef((props, ref) => {
         })
         .then((res) => {
           if (res.status === 201 || res.status === 200) {
+            addEvent(res.data);
             setFormData({
               name: "",
               short_description: "",
@@ -61,8 +60,8 @@ const AddEventDialog = forwardRef((props, ref) => {
               date: "",
               location: "",
               max_people_amount: "",
+              image: null,
             });
-            setImage(null);
             setImagePreview(null);
             fileInputRef.current.value = null;
             ref.current.close();
