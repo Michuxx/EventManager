@@ -37,7 +37,7 @@ const AddEventDialog = ({ addEvent, isOpened, setIsOpened }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     const data = new FormData();
 
     for (const key in formData) {

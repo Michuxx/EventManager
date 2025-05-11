@@ -42,6 +42,19 @@ const HomePage = () => {
       timerProgressBar: true,
     });
   };
+  const handleEditEvent = (event) => {
+    let transformedEvent = transformDate([event])[0];
+    setEvents((prev) => [...prev, transformedEvent]);
+    Swal.fire({
+      toast: true,
+      position: "top",
+      icon: "success",
+      title: "Event has been Updated!",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    });
+  };
 
   const transformDate = (events) => {
     const transformedEvents = events.map((event) => {

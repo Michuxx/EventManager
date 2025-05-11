@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import Input from "./Input";
+import axios from "axios";
 
 const EditEventDialog = ({ event, isOpened, setIsOpened }) => {
   const [formData, setFormData] = useState(event);
@@ -28,6 +29,29 @@ const EditEventDialog = ({ event, isOpened, setIsOpened }) => {
     } else {
       setImagePreview(null);
     }
+  };
+
+  const handleSubmit = async () => {
+    const data = new FormData();
+
+    data.append("name", formData.name);
+    data.append("short_description", formData.short_description);
+    data.append("long_description", formData.long_description);
+    data.append("isoDate", formData.date);
+    data.append("location", formData.location);
+    data.append("max_people_amount", formData.max_people_amount);
+    data.append("image", formData.image);
+
+    await axios
+      .put(`http://localhost:8000/events/update/${formData.id}/`, data)
+      .then((res) => {
+        setImagePreview(null);
+        fileInputRef.current.value = null;
+        setIsOpened(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (
@@ -123,7 +147,9 @@ const EditEventDialog = ({ event, isOpened, setIsOpened }) => {
           </div>
         )}
         <div className="btn-submit-wrapper">
-          <button className="submit">Edit Event</button>
+          <button className="submit" onClick={handleSubmit}>
+            Edit Event
+          </button>
         </div>
       </aside>
     </dialog>
