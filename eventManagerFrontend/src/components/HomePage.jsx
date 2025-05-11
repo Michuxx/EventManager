@@ -44,7 +44,11 @@ const HomePage = () => {
   };
   const handleEditEvent = (event) => {
     let transformedEvent = transformDate([event])[0];
-    setEvents((prev) => [...prev, transformedEvent]);
+    setEvents((prevEvents) =>
+      prevEvents.map((e) =>
+        e.id === transformedEvent.id ? transformedEvent : e
+      )
+    );
     Swal.fire({
       toast: true,
       position: "top",
@@ -136,6 +140,7 @@ const HomePage = () => {
           event={event}
           isOpened={isEditOpened}
           setIsOpened={setIsEditOpened}
+          editEvent={handleEditEvent}
         />
       )}
       <AddEventDialog

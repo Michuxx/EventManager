@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Input from "./Input";
 import axios from "axios";
 
-const EditEventDialog = ({ event, isOpened, setIsOpened }) => {
+const EditEventDialog = ({ event, isOpened, setIsOpened, editEvent }) => {
   const [formData, setFormData] = useState(event);
 
   const [imagePreview, setImagePreview] = useState(null);
@@ -47,6 +47,7 @@ const EditEventDialog = ({ event, isOpened, setIsOpened }) => {
       .then((res) => {
         setImagePreview(null);
         fileInputRef.current.value = null;
+        editEvent(res.data);
         setIsOpened(false);
       })
       .catch((err) => {
