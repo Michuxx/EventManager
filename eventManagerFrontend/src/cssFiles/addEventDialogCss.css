@@ -70,12 +70,15 @@ button.submit {
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
   border: 1px solid black;
   width: 30%;
   -webkit-box-shadow: 1px 7px 44px -10px rgba(66, 68, 90, 1);
   -moz-box-shadow: 1px 7px 44px -10px rgba(66, 68, 90, 1);
   box-shadow: 1px 7px 44px -10px rgba(66, 68, 90, 1);
+  height: 40rem;
+  overflow-y: scroll;
+  z-index: 30;
 }
 
 .dialog-header button {

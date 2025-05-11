@@ -10,6 +10,9 @@ const EditEventDialog = ({ event, isOpened, setIsOpened }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "date") {
+      setFormData((prev) => ({ ...prev, isoDate: value }));
+    }
   };
 
   const handleFileChange = (e) => {
@@ -100,11 +103,20 @@ const EditEventDialog = ({ event, isOpened, setIsOpened }) => {
             accept="image/*"
           />
         </Input>
-        {imagePreview && (
+        {imagePreview ? (
           <div className="image-preview-wrapper">
-            <p>Podgląd:</p>
+            <p>View of new image:</p>
             <img
               src={imagePreview}
+              alt="Podgląd"
+              style={{ maxWidth: "400px" }}
+            />
+          </div>
+        ) : (
+          <div className="image-preview-wrapper">
+            <p>Current image:</p>
+            <img
+              src={`http://localhost:8000/media/images/${formData.image}`}
               alt="Podgląd"
               style={{ maxWidth: "400px" }}
             />

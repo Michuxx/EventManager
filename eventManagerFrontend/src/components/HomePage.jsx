@@ -114,6 +114,9 @@ const HomePage = () => {
 
   return (
     <div className="container">
+      {(isAddingOpened || isEditOpened) && (
+        <div className="modal-overlay"></div>
+      )}
       <Navbar setIsAddingOpened={setIsAddingOpened} />
       {isEditOpened && (
         <EditEventDialog
