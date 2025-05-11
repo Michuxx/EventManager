@@ -61,9 +61,23 @@ class EditEvent(APIView):
     def put(self, request, pk):
         event = get_object_or_404(Event, pk=pk)
         data = request.data.copy()
+        image = request.FILES.get("image", None)
+   
+        if image:
+            image_folder = os.path.join(settings.MEDIA_ROOT, 'images')
+            os.makedirs(image_folder, exist_ok=True)
 
-        if 'image' not in data or data.get('image') in [None, '', 'null']:
+            image_filename = image.name
+            file_path = os.path.join(image_folder, image_filename)
+
+            with open(file_path, 'wb') as f:
+                for chunk in image.chunks():
+                    f.write(chunk)
+
+            data['image'] = image_filename
+        else:
             data.pop('image', None)
+
 
         serializer = EventSerializer(event, data=data, partial=True)
 

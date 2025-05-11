@@ -41,6 +41,7 @@ const EditEventDialog = ({ event, isOpened, setIsOpened, editEvent }) => {
     data.append("location", formData.location);
     data.append("max_people_amount", formData.max_people_amount);
     data.append("image", formData.image);
+    console.log(formData);
 
     await axios
       .put(`http://localhost:8000/events/update/${formData.id}/`, data)
@@ -134,7 +135,7 @@ const EditEventDialog = ({ event, isOpened, setIsOpened, editEvent }) => {
             <img
               src={imagePreview}
               alt="Podgląd"
-              style={{ maxWidth: "400px" }}
+              style={{ maxWidth: "400px", width: "100%" }}
             />
           </div>
         ) : (
@@ -143,7 +144,7 @@ const EditEventDialog = ({ event, isOpened, setIsOpened, editEvent }) => {
             <img
               src={`http://localhost:8000/media/images/${formData.image}`}
               alt="Podgląd"
-              style={{ maxWidth: "400px" }}
+              style={{ maxWidth: "400px", width: "100%" }}
             />
           </div>
         )}

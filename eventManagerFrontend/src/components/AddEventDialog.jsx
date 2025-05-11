@@ -155,7 +155,7 @@ const AddEventDialog = ({ addEvent, isOpened, setIsOpened }) => {
             <img
               src={imagePreview}
               alt="Podgląd"
-              style={{ maxWidth: "400px" }}
+              style={{ maxWidth: "400px", width: "100%" }}
             />
           </div>
         )}
