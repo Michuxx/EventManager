@@ -1,11 +1,11 @@
-import EventPage from "./EventPage";
+import EventCard from "./EventCard";
 
 const AllEventsPage = ({ events, deleteEvent, passEventData }) => {
   return (
     <>
       {events.length > 0 ? (
         events.map((event) => (
-          <EventPage
+          <EventCard
             key={event.id || event.name}
             id={event.id}
             title={event.name}

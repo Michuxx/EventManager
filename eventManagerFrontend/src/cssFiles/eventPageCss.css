@@ -28,7 +28,8 @@
 }
 
 button.edit,
-button.delete {
+button.delete,
+button.more-info {
   padding: 6px 12px;
   margin-right: 8px;
   border: none;
@@ -38,9 +39,18 @@ button.delete {
   min-width: 4rem;
 }
 
+button.more-info {
+  background-color: #06cd38;
+  color: white;
+}
+
 button.edit {
   background-color: #3b82f6;
   color: white;
+}
+
+button.more-info:hover {
+  background-color: #06ae30;
 }
 
 button.edit:hover {
@@ -83,6 +93,7 @@ article {
 
 .buttons-wrapper {
   display: flex;
+  justify-content: space-between;
 }
 
 .people {
@@ -104,4 +115,11 @@ article {
   width: 50%;
   display: flex;
   align-items: flex-end;
+}
+
+.link-on-button {
+  height: 100%;
+  display: flex;
+  align-items: end;
+  text-decoration: none;
 }

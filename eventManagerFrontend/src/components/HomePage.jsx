@@ -121,7 +121,7 @@ const HomePage = () => {
       })
       .catch((e) => {
         console.log(e);
-        Swal.fire("Error!", "Something went wrong.", "error");
+        Swal.fire("Error!", "Something went wrong.", e);
       });
   };
 
