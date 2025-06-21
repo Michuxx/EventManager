@@ -1,0 +1,41 @@
+import React, { useEffect, useState } from "react";
+
+const EventBuySection = ({ event }) => {
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [hour, setHour] = useState("");
+
+  useEffect(() => {
+    if (event?.date) {
+      const arr = event.date.split(" ");
+      setDay(arr[0] || "");
+      setMonth(arr[1] || "");
+      setYear(arr[2] || "");
+      setHour(arr[3] || "");
+    }
+  }, [event]);
+
+  return (
+    <div className="event-buy-section-wrapper">
+      <section>
+        <div className="date">
+          <p className="day">{day}</p>
+          <p className="month">
+            {month} {year}
+          </p>
+          <p className="hour">{hour}</p>
+        </div>
+        <div className="title-info">
+          <h3>{event.name}</h3>
+          <p>{event.location}</p>
+        </div>
+        <div className="buy-section">
+          <button className="buy-btn">Book Tickets!</button>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default EventBuySection;

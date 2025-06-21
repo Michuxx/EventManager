@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import EditEventDialog from "./EditEventDialog";
 import NavbarEditItems from "./NavbarEditItems";
 import axios from "axios";
+import EventDetails from "./EventDetails";
 
 const EventPage = () => {
   const [isEditOpened, setIsEditOpened] = useState(false);
@@ -35,7 +36,6 @@ const EventPage = () => {
       .then((res) => {
         const normalizedData = transformDate(res.data);
         setCurrentEvent(normalizedData);
-        console.log(currentEvent);
       })
       .catch((e) => {
         console.log(e);
@@ -45,6 +45,8 @@ const EventPage = () => {
   useEffect(() => {
     getCurrentEvent();
   }, []);
+
+  console.log(currentEvent);
 
   const handleEditEvent = (event) => {
     Swal.fire({
@@ -72,6 +74,7 @@ const EventPage = () => {
             editEvent={handleEditEvent}
           />
         )}
+        <EventDetails event={currentEvent} />
       </div>
     </>
   );

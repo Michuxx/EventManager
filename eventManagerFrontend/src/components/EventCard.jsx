@@ -1,5 +1,4 @@
 import "../cssFiles/eventPageCss.css";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const EventCard = ({
@@ -14,8 +13,6 @@ const EventCard = ({
   deleteEvent,
   passEventData,
 }) => {
-  const navigate = useNavigate();
-
   const turnEditModal = (e) => {
     e.stopPropagation();
     passEventData(id);
