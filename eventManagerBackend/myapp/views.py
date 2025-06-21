@@ -57,6 +57,12 @@ class DeleteEvent(APIView):
         event.delete()
         return Response({"message": "Event deleted"}, status=status.HTTP_204_NO_CONTENT)
     
+class GetEvent(APIView):
+    def get(self, request, pk):
+        event = get_object_or_404(Event, pk=pk)
+        serializer = EventSerializer(event)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 class EditEvent(APIView):
     def put(self, request, pk):
         event = get_object_or_404(Event, pk=pk)

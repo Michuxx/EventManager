@@ -1,13 +1,11 @@
 import "../cssFiles/navbarCss.css";
 
-const Navbar = ({ setIsAddingOpened }) => {
+const Navbar = ({ children }) => {
   return (
     <>
       <header>
         <div className="logo">EventManager</div>
-        <div className="nav-links">
-          <button onClick={() => setIsAddingOpened(true)}>Add Event</button>
-        </div>
+        {children}
       </header>
     </>
   );

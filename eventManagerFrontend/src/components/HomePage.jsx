@@ -5,6 +5,7 @@ import AddEventDialog from "./AddEventDialog";
 import EditEventDialog from "./EditEventDialog";
 import axios from "axios";
 import Swal from "sweetalert2";
+import NavbarAddItems from "./NavbarAddItems";
 
 const HomePage = () => {
   const [isEditOpened, setIsEditOpened] = useState(false);
@@ -134,7 +135,9 @@ const HomePage = () => {
       {(isAddingOpened || isEditOpened) && (
         <div className="modal-overlay"></div>
       )}
-      <Navbar setIsAddingOpened={setIsAddingOpened} />
+      <Navbar>
+        <NavbarAddItems setIsAddingOpened={setIsAddingOpened} />
+      </Navbar>
       {isEditOpened && (
         <EditEventDialog
           event={event}
