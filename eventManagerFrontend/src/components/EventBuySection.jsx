@@ -18,6 +18,16 @@ const EventBuySection = ({ event }) => {
 
   return (
     <div className="event-buy-section-wrapper">
+      <div className="people-amount">
+        <p>
+          {event.people_amount}/{event.max_people_amount}
+        </p>
+        <img
+          src="/user.png"
+          alt="user"
+          style={{ width: "50px", height: "auto" }}
+        />
+      </div>
       <section>
         <div className="date">
           <p className="day">{day}</p>

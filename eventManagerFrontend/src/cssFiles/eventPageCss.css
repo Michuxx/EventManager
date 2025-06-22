@@ -49,6 +49,15 @@ button.edit {
   color: white;
 }
 
+button.back {
+  width: 2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 20px 1px 20px;
+}
+
 button.more-info:hover {
   background-color: #06ae30;
 }

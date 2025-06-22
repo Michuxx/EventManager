@@ -10,6 +10,10 @@ header {
   font-weight: bold;
 }
 
+.nav-links {
+  display: flex;
+}
+
 .nav-links button {
   padding: 9px 16px;
   margin-right: 8px;

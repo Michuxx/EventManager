@@ -14,6 +14,7 @@ const EditEventDialog = ({ event, isOpened, setIsOpened, editEvent }) => {
     if (name === "date") {
       setFormData((prev) => ({ ...prev, isoDate: value }));
     }
+    console.log(formData);
   };
 
   const handleFileChange = (e) => {
@@ -37,11 +38,10 @@ const EditEventDialog = ({ event, isOpened, setIsOpened, editEvent }) => {
     data.append("name", formData.name);
     data.append("short_description", formData.short_description);
     data.append("long_description", formData.long_description);
-    data.append("isoDate", formData.date);
+    data.append("date", formData.isoDate);
     data.append("location", formData.location);
     data.append("max_people_amount", formData.max_people_amount);
     data.append("image", formData.image);
-    console.log(formData);
 
     await axios
       .put(`http://localhost:8000/events/update/${formData.id}/`, data)

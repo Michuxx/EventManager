@@ -5,6 +5,7 @@ import EditEventDialog from "./EditEventDialog";
 import NavbarEditItems from "./NavbarEditItems";
 import axios from "axios";
 import EventDetails from "./EventDetails";
+import Swal from "sweetalert2";
 
 const EventPage = () => {
   const [isEditOpened, setIsEditOpened] = useState(false);
@@ -48,7 +49,9 @@ const EventPage = () => {
 
   console.log(currentEvent);
 
-  const handleEditEvent = (event) => {
+  const handleEditEvent = (editedEvent) => {
+    let transformedEvent = transformDate(editedEvent);
+    setCurrentEvent(transformedEvent);
     Swal.fire({
       toast: true,
       position: "top",
@@ -63,6 +66,7 @@ const EventPage = () => {
   return (
     <>
       <div className="container">
+        {isEditOpened && <div className="modal-overlay"></div>}
         <Navbar>
           <NavbarEditItems handleEditEvent={setIsEditOpened} />
         </Navbar>
