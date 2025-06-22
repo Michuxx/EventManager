@@ -49,8 +49,6 @@ const EventPage = () => {
     getCurrentEvent();
   }, []);
 
-  console.log(currentEvent);
-
   const handleEditEvent = (editedEvent) => {
     let transformedEvent = transformDate(editedEvent);
     setCurrentEvent(transformedEvent);
@@ -63,6 +61,13 @@ const EventPage = () => {
       timer: 3000,
       timerProgressBar: true,
     });
+  };
+
+  const handleChangePeople = (e) => {
+    setCurrentEvent((prev) => ({
+      ...prev,
+      people_amount: parseInt(currentEvent.people_amount) + parseInt(e),
+    }));
   };
 
   return (
@@ -89,6 +94,7 @@ const EventPage = () => {
             setIsOpened={setIsBookOpened}
             eventId={passedId}
             maxAmountPeople={currentEvent.maxAmountPeople}
+            handleChangePeople={handleChangePeople}
           />
         )}
       </div>

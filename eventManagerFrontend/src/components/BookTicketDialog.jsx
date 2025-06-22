@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Input from "./Input";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const BookTicketDialog = ({
   isOpened,
   setIsOpened,
   eventId,
   maxAmountPeople,
+  handleChangePeople,
 }) => {
   const [tickets, setTickets] = useState(0);
 
@@ -23,10 +25,20 @@ const BookTicketDialog = ({
       .put(`http://localhost:8000/events/book/${eventId}/`, data)
       .then((res) => {
         setIsOpened(false);
-        console.log(res.data);
+        handleChangePeople(tickets);
+        Swal.fire({
+          toast: true,
+          position: "top",
+          icon: "success",
+          title: "Bought " + tickets + " Tickets!",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
       })
       .catch((err) => {
         console.log(err.message);
+        Swal.fire("Error!", "Wrong number of tickets or too many tickets!");
       });
   };
   return (
