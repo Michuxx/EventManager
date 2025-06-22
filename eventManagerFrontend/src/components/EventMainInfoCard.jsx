@@ -1,4 +1,4 @@
-const EventMainInfoCard = ({ event }) => {
+const EventMainInfoCard = ({ event, handleScrollToBottom }) => {
   return (
     <div className="event-card-details">
       <div className="background-event-image">
@@ -10,7 +10,9 @@ const EventMainInfoCard = ({ event }) => {
           <h1>{event.name}</h1>
           <p>{event.short_description}</p>
           <p>{event.date}</p>
-          <button className="buy-btn">Book Tickets!</button>
+          <button className="buy-btn" onClick={handleScrollToBottom}>
+            Book Tickets!
+          </button>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 
-const EventBuySection = ({ event, handleBookTicket }) => {
+const EventBuySection = forwardRef(({ event, handleBookTicket }, ref) => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
@@ -41,13 +41,17 @@ const EventBuySection = ({ event, handleBookTicket }) => {
           <p>{event.location}</p>
         </div>
         <div className="buy-section">
-          <button className="buy-btn" onClick={() => handleBookTicket(true)}>
+          <button
+            className="buy-btn"
+            onClick={() => handleBookTicket(true)}
+            ref={ref}
+          >
             Book Tickets!
           </button>
         </div>
       </section>
     </div>
   );
-};
+});
 
 export default EventBuySection;
