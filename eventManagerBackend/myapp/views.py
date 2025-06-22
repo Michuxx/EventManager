@@ -92,3 +92,31 @@ class EditEvent(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BookTickets(APIView):
+    def put(self, request, pk):
+        event = get_object_or_404(Event, pk=pk)
+
+        ticketsToBook = request.data.get("tickets")
+        try:
+            ticketsToBook = int(ticketsToBook)
+        except ValueError:
+            return Response({"error": "'tickets' must be an integer"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if ticketsToBook is None:
+            return Response({"error": "Missing 'tickets' in request data"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if ticketsToBook < 0:
+            return Response({"error": "you cannot book less than 0 tickets!"}, status=status.HTTP_400_BAD_REQUEST)
+
+        
+
+        if event.people_amount + ticketsToBook > event.max_people_amount:
+            return Response({"error": "Not enough available tickets"}, status=status.HTTP_400_BAD_REQUEST)
+
+        event.people_amount += ticketsToBook
+        event.save()
+
+        serializer = EventSerializer(event)
+        
+        return Response(serializer.data, status=status.HTTP_200_OK)

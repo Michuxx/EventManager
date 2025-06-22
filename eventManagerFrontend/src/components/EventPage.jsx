@@ -87,6 +87,8 @@ const EventPage = () => {
           <BookTicketDialog
             isOpened={isBookOpened}
             setIsOpened={setIsBookOpened}
+            eventId={passedId}
+            maxAmountPeople={currentEvent.maxAmountPeople}
           />
         )}
       </div>
