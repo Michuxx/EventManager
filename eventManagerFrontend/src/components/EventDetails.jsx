@@ -3,7 +3,7 @@ import EventBuySection from "./EventBuySection";
 import EventDescription from "./EventDescription";
 import EventMainInfoCard from "./EventMainInfoCard";
 
-const EventDetails = ({ event }) => {
+const EventDetails = ({ event, handleBookTicket }) => {
   if (!event) {
     return <p>Event Loading...</p>;
   }
@@ -11,7 +11,7 @@ const EventDetails = ({ event }) => {
   return (
     <>
       <EventMainInfoCard event={event} />
-      <EventBuySection event={event} />
+      <EventBuySection event={event} handleBookTicket={handleBookTicket} />
       <EventDescription longDescription={event.long_description} />
     </>
   );

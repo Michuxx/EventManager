@@ -6,9 +6,11 @@ import NavbarEditItems from "./NavbarEditItems";
 import axios from "axios";
 import EventDetails from "./EventDetails";
 import Swal from "sweetalert2";
+import BookTicketDialog from "./BookTicketDialog";
 
 const EventPage = () => {
   const [isEditOpened, setIsEditOpened] = useState(false);
+  const [isBookOpened, setIsBookOpened] = useState(false);
   const [currentEvent, setCurrentEvent] = useState();
   const location = useLocation();
   const passedId = location.state;
@@ -66,7 +68,9 @@ const EventPage = () => {
   return (
     <>
       <div className="container">
-        {isEditOpened && <div className="modal-overlay"></div>}
+        {(isEditOpened || isBookOpened) && (
+          <div className="modal-overlay"></div>
+        )}
         <Navbar>
           <NavbarEditItems handleEditEvent={setIsEditOpened} />
         </Navbar>
@@ -78,7 +82,13 @@ const EventPage = () => {
             editEvent={handleEditEvent}
           />
         )}
-        <EventDetails event={currentEvent} />
+        <EventDetails event={currentEvent} handleBookTicket={setIsBookOpened} />
+        {isBookOpened && (
+          <BookTicketDialog
+            isOpened={isBookOpened}
+            setIsOpened={setIsBookOpened}
+          />
+        )}
       </div>
     </>
   );

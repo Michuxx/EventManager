@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const EventBuySection = ({ event }) => {
+const EventBuySection = ({ event, handleBookTicket }) => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
@@ -41,7 +41,9 @@ const EventBuySection = ({ event }) => {
           <p>{event.location}</p>
         </div>
         <div className="buy-section">
-          <button className="buy-btn">Book Tickets!</button>
+          <button className="buy-btn" onClick={() => handleBookTicket(true)}>
+            Book Tickets!
+          </button>
         </div>
       </section>
     </div>
