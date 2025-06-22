@@ -1,5 +1,6 @@
 import "../cssFiles/eventDetailsCss.css";
 import EventBuySection from "./EventBuySection";
+import EventDescription from "./EventDescription";
 import EventMainInfoCard from "./EventMainInfoCard";
 
 const EventDetails = ({ event }) => {
@@ -11,6 +12,7 @@ const EventDetails = ({ event }) => {
     <>
       <EventMainInfoCard event={event} />
       <EventBuySection event={event} />
+      <EventDescription longDescription={event.long_description} />
     </>
   );
 };
